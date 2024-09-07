@@ -81,24 +81,3 @@ func NewProductRepository(db *sql.DB) ProductRepository {
 		db: db,
 	}
 }
-
-func InitDB() (*sql.DB, error) {
-	db, err := sql.Open("sqlite3", "./products.db")
-	if err != nil {
-		return nil, err
-	}
-
-	query := `
-    CREATE TABLE IF NOT EXISTS products (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        price REAL
-    );
-    `
-	_, err = db.Exec(query)
-	if err != nil {
-		return nil, err
-	}
-
-	return db, nil
-}
